@@ -11,6 +11,13 @@
 - [Analysis and Results](#analysis-and-results)
 - [Visualizations](#visualizations)
 - [Example Code](#example-code)
+  - [Loading Libraries and Data](#loading-libraries-and-data)
+  - [Initial Data Exploration](#initial-data-exploration)
+  - [Measures of Central Tendency](#measures-of-central-tendency-example)
+  - [Measures of Location](#measures-of-location-example)
+  - [Measures of Dispersion](#measures-of-dispersion-example)
+  - [Shape Characteristics](#shape-characteristics-example)
+  - [Histogram Visualization](#histogram-visualization)
 - [Conclusion](#conclusion)
 - [Usage](#usage)
 - [Dependencies](#dependencies)
@@ -94,7 +101,7 @@ The notebook includes a histogram of the 'Amount' column, which visually confirm
 
 ## Example Code
 
-Here are some key code snippets from the Jupyter Notebook demonstrating the analysis:
+Here are some key code snippets from the Jupyter Notebook demonstrating the analysis for each topic:
 
 ### Loading Libraries and Data
 ```python
@@ -116,31 +123,39 @@ df.shape
 df.columns
 ```
 
-### Measures of Central Tendency, Location, and Dispersion for 'Amount' Column
+### Measures of Central Tendency Example
 ```python
 mean_amount = df["Amount"].mean()
 median_amount = df["Amount"].median()
 mode_amount = df["Amount"].mode()[0]
 
+print(f"Mean: {mean_amount}, Median: {median_amount}, Mode: {mode_amount}")
+```
+
+### Measures of Location Example
+```python
 q1_amount = df["Amount"].quantile(0.25)
 q3_amount = df["Amount"].quantile(0.75)
 deciles_amount = df["Amount"].quantile([.10, .20, .30, 0.40, 0.50, 0.60, 0.70, 0.80, 0.90])
 percentiles_amount = df["Amount"].quantile([0.10, 0.90])
 
+print(f"Q1: {q1_amount}, Q3: {q3_amount}")
+print(f"Deciles: {deciles_amount.values}")
+print(f"Percentiles (10% & 90%): {percentiles_amount.values}")
+```
+
+### Measures of Dispersion Example
+```python
 std_amount = df["Amount"].std()
 var_amount = df["Amount"].var()
 cv_amount = (std_amount / mean_amount) * 100
 
-print(f"Mean: {mean_amount}, Median: {median_amount}, Mode: {mode_amount}")
-print(f"Q1: {q1_amount}, Q3: {q3_amount}")
-print(f"Deciles: {deciles_amount.values}")
-print(f"Percentiles (10% & 90%): {percentiles_amount.values}")
 print(f"Standard Deviation: {std_amount}")
 print(f"Variance: {var_amount}")
 print(f"Coefficient of Variation: {cv_amount:.2f}%")
 ```
 
-### Shape Characteristics (Skewness and Kurtosis)
+### Shape Characteristics Example
 ```python
 skewness_amount = stats.skew(df["Amount"].dropna())
 kurtosis_amount = stats.kurtosis(df["Amount"].dropna())
