@@ -1,87 +1,106 @@
-# Statistics Course Notes Summary
+# Descriptive Statistics & Shape Characteristics
 
-This document provides a comprehensive overview of the fundamental concepts and terms covered in the **Statistics Course Notes**. It is designed as a quick reference guide for both **Descriptive** and **Inferential Statistics**, including practical Excel applications.
+## Table of Contents
+- [Project Overview](#project-overview)
+- [Key Concepts](#key-concepts)
+  - [Measures of Central Tendency](#measures-of-central-tendency)
+  - [Measures of Location](#measures-of-location)
+  - [Measures of Dispersion](#measures-of-dispersion)
+  - [Shape Characteristics](#shape-characteristics)
+- [Methodology](#methodology)
+- [Analysis and Results](#analysis-and-results)
+- [Visualizations](#visualizations)
+- [Conclusion](#conclusion)
+- [Usage](#usage)
+- [Dependencies](#dependencies)
 
----
+## Project Overview
+This Jupyter Notebook provides a comprehensive analysis of descriptive statistics and shape characteristics using a real-world dataset, specifically the "Amazon Sale Report.csv". The primary goal is to demonstrate the application and interpretation of various statistical measures to understand the distribution and properties of data.
 
-## 1. Descriptive Statistics
+## Key Concepts
 
-Descriptive statistics focus on summarizing and describing the features of a dataset.
+### Measures of Central Tendency
+Measures of central tendency help identify the 'center' or typical value of a dataset.
 
-### Data Types and Measurement
-| Category | Sub-type | Description | Examples |
-| :--- | :--- | :--- | :--- |
-| **Categorical** | Nominal | Categories with no inherent order. | Car brands, Seasons |
-| | Ordinal | Categories with a logical order. | Meal ratings (Poor to Excellent) |
-| **Numerical** | Discrete | Countable values. | Number of children, SAT scores |
-| | Continuous | Infinite, measurable values. | Weight, Height, Time |
+- **Mean:** The arithmetic average of all values. It is sensitive to outliers.
+- **Median:** The middle value when the data is ordered. It is robust to outliers.
+- **Mode:** The most frequently occurring value in the dataset. Useful for categorical data.
 
-### Levels of Measurement
-*   **Qualitative:** Nominal and Ordinal.
-*   **Quantitative:** Interval (no true zero, e.g., Celsius) and Ratio (true zero, e.g., Kelvin, Length).
+### Measures of Location
+Measures of location help understand the position of specific values within the data distribution.
 
-### Visualizing Data
-*   **Categorical:** Bar Charts, Pie Charts, Pareto Diagrams (descending order with cumulative frequency curve).
-*   **Numerical:** Histograms (bars touch to show continuity).
-*   **Relationships:** Cross Tables (Contingency Tables), Side-by-side Bar Charts, and Scatter Plots (used to detect patterns like linearity).
+- **Quartiles:** Divide the data into four equal parts (Q1: 25th percentile, Q2: 50th percentile/Median, Q3: 75th percentile).
+- **Deciles:** Divide the data into ten equal parts.
+- **Percentiles:** Indicate the percentage of values in a dataset that are below a particular value.
 
-### Measures of Central Tendency & Dispersion
-*   **Mean:** The simple average (sensitive to outliers).
-*   **Median:** The midpoint of an ordered dataset (robust to outliers).
-*   **Mode:** The most frequent value.
-*   **Skewness:** Measures asymmetry (Right/Positive vs. Left/Negative).
-*   **Variance & Standard Deviation:** Measure data dispersion around the mean.
-*   **Covariance & Correlation:** Measure joint variability between two variables. Correlation is standardized (-1 to 1).
+### Measures of Dispersion
+Measures of dispersion describe the spread or variability of the data.
 
----
+- **Range:** The difference between the maximum and minimum values.
+- **Variance:** The average of the squared differences from the mean. It quantifies how much the data points deviate from the mean.
+- **Standard Deviation:** The square root of the variance. It provides a measure of spread in the same units as the data.
+- **Coefficient of Variation (CV):** The ratio of the standard deviation to the mean, expressed as a percentage. It is useful for comparing the relative variability between datasets with different units or scales.
 
-## 2. Inferential Statistics
+### Shape Characteristics
+Shape characteristics describe the form of the data distribution.
 
-Inferential statistics use sample data to make generalizations about a larger population.
+- **Skewness:** Measures the asymmetry of the probability distribution. 
+  - **Positive Skew (> 0):** The tail on the right side is longer, indicating more extreme high values.
+  - **Negative Skew (< 0):** The tail on the left side is longer, indicating more extreme low values.
+  - **Zero Skew (≈ 0):** The distribution is roughly symmetrical.
 
-### Key Distributions
-*   **Normal Distribution (Gaussian):** The "Bell Curve," defined by mean ($\mu$) and variance ($\sigma^2$).
-*   **Standard Normal Distribution:** A normal distribution with $\mu=0$ and $\sigma=1$. Uses **Z-scores** for standardization.
-*   **Student’s T Distribution:** Used for small samples or when population variance is unknown; has "fatter tails" to account for uncertainty.
-*   **Others:** Binomial, Poisson, and Uniform distributions.
+- **Kurtosis:** Measures the 'tailedness' of the distribution, indicating how concentrated the data is around the mean and the heaviness of the tails.
+  - **Leptokurtic (> 0):** Heavier tails and a sharper peak than a normal distribution, indicating more extreme values.
+  - **Platykurtic (< 0):** Lighter tails and a flatter peak than a normal distribution, indicating fewer extreme values.
+  - **Mesokurtic (≈ 0):** Similar tail behavior and peak shape to a normal distribution.
 
-### The Central Limit Theorem (CLT)
-The CLT states that the sampling distribution of the mean will approximate a normal distribution as the sample size ($n$) becomes large, regardless of the population's original distribution.
+## Methodology
+The notebook follows these steps:
+1.  **Library and Data Loading:** Imports necessary libraries (pandas, numpy, seaborn, matplotlib, scipy, statsmodels) and loads the `Amazon Sale Report.csv` dataset.
+2.  **Initial Data Exploration:** Displays basic information about the dataset, including `df.head()`, `df.info()`, `df.shape`, and `df.columns` to understand its structure and identify potential issues.
+3.  **Missing Values and Duplicates:** Checks for missing values across columns and identifies duplicate rows.
+4.  **Central Tendency and Location Calculation:** Calculates mean, median, mode, quartiles (Q1, Q3), deciles, and percentiles for the 'Amount' column.
+5.  **Dispersion Calculation:** Computes standard deviation, variance, and coefficient of variation for the 'Amount' column.
+6.  **Shape Characteristics Calculation:** Determines the skewness and kurtosis of the 'Amount' column.
+7.  **Visualizations:** Generates a histogram of the 'Amount' column to visually inspect its distribution.
 
-### Estimation
-*   **Point Estimate:** A single value (e.g., sample mean).
-*   **Confidence Interval (CI):** A range of values within which we expect the population parameter to fall, governed by the **Level of Confidence (1-$\alpha$)**.
-*   **Margin of Error (ME):** The range added/subtracted from the point estimate.
+## Analysis and Results
 
----
+**Dataset Information:**
+- The dataset contains 128,975 entries and 24 columns.
+- Columns like `Courier Status`, `currency`, `Amount`, `ship-city`, `ship-state`, `ship-postal-code`, `ship-country`, `promotion-ids`, `fulfilled-by`, and `Unnamed: 22` contain missing values.
+- No duplicate rows were found.
 
-## 3. Hypothesis Testing
+**Measures for 'Amount' Column:**
+- **Mean:** 648.56
+- **Median:** 605.0
+- **Mode:** 399.0
+- **Q1 (25th Percentile):** 449.0
+- **Q3 (75th Percentile):** 788.0
+- **Deciles:** [358.1, 406.0, 475.0, 533.0, 605.0, 690.0, 758.0, 837.0, 1068.0]
+- **10th Percentile:** 358.1
+- **90th Percentile:** 1068.0
+- **Standard Deviation:** 281.21
+- **Variance:** 79079.0
+- **Coefficient of Variation:** 43.36%
 
-A systematic method for testing claims about a population.
+**Shape Characteristics for 'Amount' Column:**
+- **Skewness:** 0.885 (Positive Skew)
+- **Kurtosis:** 3.003 (Leptokurtic)
 
-### Core Concepts
-*   **Null Hypothesis ($H_0$):** The status-quo or statement to be tested (assumed true until proven otherwise).
-*   **Alternative Hypothesis ($H_1$):** The new claim or innovation being tested.
-*   **Significance Level ($\alpha$):** The probability of rejecting a true null hypothesis (Type I Error). Common levels: 0.01, 0.05, 0.10.
-*   **P-value:** The smallest significance level at which $H_0$ can be rejected. A p-value < $\alpha$ typically leads to rejecting $H_0$.
+## Visualizations
+The notebook includes a histogram of the 'Amount' column, which visually confirms the positive skewness and the presence of a longer tail towards higher values. The `kde=True` argument in `sns.histplot` also overlays a Kernel Density Estimate to smooth the distribution curve.
 
-### Statistical Errors
-| Error Type | Name | Description |
-| :--- | :--- | :--- |
-| **Type I** | False Positive | Rejecting $H_0$ when it is actually true. |
-| **Type II** | False Negative | Failing to reject $H_0$ when it is actually false. |
+## Conclusion
+The analysis of the 'Amount' column reveals a positively skewed distribution, indicating that there are more sales with smaller amounts, but also a tail of significantly larger sales. The leptokurtic nature suggests that the data has heavier tails and a sharper peak than a normal distribution, implying a higher likelihood of extreme values (outliers) in the sales amounts. These insights are crucial for understanding sales patterns and can inform business decisions, such as inventory management or marketing strategies.
 
----
+## Usage
+To run this notebook, ensure you have Jupyter Notebook or JupyterLab installed. You will also need the `Amazon Sale Report.csv` file in the same directory as the notebook. Execute the cells sequentially to reproduce the analysis.
 
-## 4. Excel Functions Reference
-
-| Task | Excel Formula |
-| :--- | :--- |
-| **Central Tendency** | `=AVERAGE()`, `=MEDIAN()`, `=MODE.SNGL()` |
-| **Dispersion** | `=VAR.S()`, `=STDEV.S()`, `=SKEW()` |
-| **Relationships** | `=CORREL()`, `=COVARIANCE.S()` |
-| **Counting** | `=COUNTIF()`, `=SUM()` |
-
----
-
-> **Note:** For detailed formulas and step-by-step Excel tutorials, refer to the original course documentation and accompanying exercise files.
+## Dependencies
+- `pandas`
+- `numpy`
+- `seaborn`
+- `matplotlib`
+- `scipy`
+- `statsmodels`
