@@ -10,6 +10,7 @@
 - [Methodology](#methodology)
 - [Analysis and Results](#analysis-and-results)
 - [Visualizations](#visualizations)
+- [Example Code](#example-code)
 - [Conclusion](#conclusion)
 - [Usage](#usage)
 - [Dependencies](#dependencies)
@@ -90,6 +91,69 @@ The notebook follows these steps:
 
 ## Visualizations
 The notebook includes a histogram of the 'Amount' column, which visually confirms the positive skewness and the presence of a longer tail towards higher values. The `kde=True` argument in `sns.histplot` also overlays a Kernel Density Estimate to smooth the distribution curve.
+
+## Example Code
+
+Here are some key code snippets from the Jupyter Notebook demonstrating the analysis:
+
+### Loading Libraries and Data
+```python
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+from scipy import stats
+import statsmodels.api as sm
+
+df = pd.read_csv("Amazon Sale Report.csv")
+```
+
+### Initial Data Exploration
+```python
+df.head()
+df.info()
+df.shape
+df.columns
+```
+
+### Measures of Central Tendency, Location, and Dispersion for 'Amount' Column
+```python
+mean_amount = df["Amount"].mean()
+median_amount = df["Amount"].median()
+mode_amount = df["Amount"].mode()[0]
+
+q1_amount = df["Amount"].quantile(0.25)
+q3_amount = df["Amount"].quantile(0.75)
+deciles_amount = df["Amount"].quantile([.10, .20, .30, 0.40, 0.50, 0.60, 0.70, 0.80, 0.90])
+percentiles_amount = df["Amount"].quantile([0.10, 0.90])
+
+std_amount = df["Amount"].std()
+var_amount = df["Amount"].var()
+cv_amount = (std_amount / mean_amount) * 100
+
+print(f"Mean: {mean_amount}, Median: {median_amount}, Mode: {mode_amount}")
+print(f"Q1: {q1_amount}, Q3: {q3_amount}")
+print(f"Deciles: {deciles_amount.values}")
+print(f"Percentiles (10% & 90%): {percentiles_amount.values}")
+print(f"Standard Deviation: {std_amount}")
+print(f"Variance: {var_amount}")
+print(f"Coefficient of Variation: {cv_amount:.2f}%")
+```
+
+### Shape Characteristics (Skewness and Kurtosis)
+```python
+skewness_amount = stats.skew(df["Amount"].dropna())
+kurtosis_amount = stats.kurtosis(df["Amount"].dropna())
+
+print(f"Skewness: {skewness_amount}, Kurtosis: {kurtosis_amount}")
+```
+
+### Histogram Visualization
+```python
+sns.histplot(df['Amount'], kde=True, stat='density')
+plt.title('Histogram of Amount')
+plt.show()
+```
 
 ## Conclusion
 The analysis of the 'Amount' column reveals a positively skewed distribution, indicating that there are more sales with smaller amounts, but also a tail of significantly larger sales. The leptokurtic nature suggests that the data has heavier tails and a sharper peak than a normal distribution, implying a higher likelihood of extreme values (outliers) in the sales amounts. These insights are crucial for understanding sales patterns and can inform business decisions, such as inventory management or marketing strategies.
