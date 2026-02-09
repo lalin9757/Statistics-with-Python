@@ -227,7 +227,3 @@ print(results.summary())
 ```
 
 ---
-
-## Author
-
-**Manus AI**
