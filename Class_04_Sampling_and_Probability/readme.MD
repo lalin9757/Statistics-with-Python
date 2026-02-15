@@ -91,4 +91,3 @@ print("\nSample Proportions:\n", stratified_sample["AHD"].value_counts(normalize
 1.  Make sure you have `pandas` and `scikit-learn` installed (`pip install pandas scikit-learn`).
 2.  Save the code and `heart.csv` in the same folder.
 3.  Run the Python script.
-4.  Lalin
